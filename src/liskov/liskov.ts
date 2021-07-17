@@ -1,42 +1,46 @@
-type WEB_PART = "frontend" | "backend" | "others";
+type WorkType = "frontend" | "backend" | "others";
+type Output = "website" | "webserver";
 
-/**
- * TRY: 바꿔서 시도해보세요
- */
-interface WebDeveloper {
-  work: (part: WEB_PART) => "something good" | "something bad";
-  // work(part: WEB_PART): "something good" | "something bad"; // not throw error
+interface WebDeveloper<T, R> {
+  // work: (workType: T) => R;
+  work(workType: WorkType): R; // not throw error
 }
 
 // Interface 'FrontendDeveloper' incorrectly extends interface 'WebDeveloper'.
-interface FrontendDeveloper extends WebDeveloper {
-  work: (part: "frontend") => "something good";
+interface FrontendDeveloper extends WebDeveloper<WorkType, Output> {
+  work: (workType: "frontend") => "website";
 }
 
-const cooljay: WebDeveloper = {
-  work(part: WEB_PART) {
+const cooljay: WebDeveloper<WorkType, Output> = {
+  work(workType: WorkType) {
     // doing "frontend" | "backend" | "others" things
-    return "something good";
+    return "website";
   },
 };
 
 // The expected type comes from property 'work' which is declared here on type 'WebDeveloper'
-const hyeok: WebDeveloper = {
-  work(part: "frontend") {
+const hyeok: WebDeveloper<WorkType, Output> = {
+  work(workType: "frontend") {
     // doing only "frontend" things
-    return "something good";
+    return "website";
   },
 };
 
 const eunji: FrontendDeveloper = {
-  work(part: "frontend") {
+  work(workType: "frontend") {
     // doing only "frontend" things
-    return "something good";
+    return "website";
   },
 };
 
-const startProject = (developer: WebDeveloper, part: WEB_PART) => {
-  developer.work(part);
+const deploy = (website: Output) => console.log(website);
+
+const startProject = (
+  developer: WebDeveloper<WorkType, Output>,
+  workType: WorkType
+): void => {
+  const output = developer.work(workType);
+  return void deploy("webserver");
 };
 
 startProject(cooljay, "frontend");
