@@ -1,6 +1,5 @@
 import go from "./go";
-
-type AnyFunction = (...args: any[]) => any;
+import type { AnyFunction } from "./types";
 
 const pipe =
   (...fns: AnyFunction[]) =>
