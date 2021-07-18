@@ -1,5 +1,5 @@
 const iterReduce = (
-  iter: Generator<number, void, unknown>,
+  iter: IterableIterator<any>,
   fn: (prev: any, curr: any) => any,
   initialValue?: any
 ) => {
