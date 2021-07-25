@@ -1,5 +1,6 @@
-import go from "../go";
-it("go", () => {
+import go from '../go';
+
+it('go', () => {
   expect(
     go(
       0,

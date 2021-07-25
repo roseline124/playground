@@ -1,6 +1,6 @@
-import pipe from "../pipe";
+import pipe from '../pipe';
 
-test("pipe", () => {
+test('pipe', () => {
   const fn = pipe(
     (a: number) => a + 1,
     (a: number) => a + 10,

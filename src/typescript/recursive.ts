@@ -2,10 +2,8 @@
 type RecursivePartial<T> = Partial<
   {
     [key in keyof T]: T[key] extends (...a: Array<infer U>) => any
-      ? (
-          ...a: Array<U>
-        ) => RecursivePartial<ReturnType<T[key]>> | ReturnType<T[key]> // tslint:disable-line
-      : T[key] extends Array<any>
+      ? (...a: U[]) => RecursivePartial<ReturnType<T[key]>> | ReturnType<T[key]>
+      : T[key] extends any[]
       ? Array<RecursivePartial<T[key][number]>>
       : RecursivePartial<T[key]> | T[key];
   }
@@ -21,7 +19,7 @@ type NestedType = {
   a: string;
   b: string;
   fetch: (...args: string[]) => DataPayload;
-  arry: Array<DataPayload>;
+  arry: DataPayload[];
 };
 
 const a: RecursivePartial<NestedType> = {};

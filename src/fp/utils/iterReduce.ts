@@ -1,16 +1,16 @@
 const iterReduce = (
-  iter: IterableIterator<any>,
-  fn: (prev: any, curr: any) => any,
-  initialValue?: any
+	iter: IterableIterator<any>,
+	fn: (previous: any, curr: any) => any,
+	initialValue?: any,
 ) => {
-  let tmp =
-    typeof initialValue !== "undefined" ? initialValue : iter.next().value;
+	let previous
+    = typeof initialValue !== 'undefined' ? initialValue : iter.next().value;
 
-  for (const item of iter) {
-    tmp = fn(tmp, item);
-  }
+	for (const curr of iter) {
+		previous = fn(previous, curr);
+	}
 
-  return tmp;
+	return previous;
 };
 
 export default iterReduce;
