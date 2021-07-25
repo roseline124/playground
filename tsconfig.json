@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "strict": true, // --strictFunctionTypes: arrow 형식으로 메서드 타입 정의 시 함수 파라미터가 반공변성을 띄게 된다
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "downlevelIteration": true,
     "target": "es2020", // Node.js 14

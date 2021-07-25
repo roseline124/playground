@@ -1,10 +1,12 @@
-const iterMap = (iter: IterableIterator<any>, fn: (item: any) => any) => {
-	const temporary = [];
-	for (const item of iter) {
-		temporary.push(fn(item));
-	}
+import curry from './curry';
 
-	return temporary;
-};
+const iterMap = curry((fn: (item: any) => any, iter: IterableIterator<any>) => {
+  const temporary = [];
+  for (const item of iter) {
+    temporary.push(fn(item));
+  }
+
+  return temporary;
+});
 
 export default iterMap;

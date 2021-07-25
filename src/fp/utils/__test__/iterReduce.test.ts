@@ -14,9 +14,12 @@ describe('iterReduce', () => {
   });
 
   test('iterReduce은 iterable을 처리할 수 있다.', () => {
-    expect(iterReduce(gen(), (previous, curr) => previous + curr)).toEqual(6);
-    expect(iterReduce(gen(), (previous, curr) => previous + curr, 0)).toEqual(
-      6
-    );
+    expect(
+      iterReduce((previous: any, curr: any) => previous + curr, gen())
+    ).toEqual(6);
+
+    expect(
+      iterReduce((previous: any, curr: any) => previous + curr, 0, gen())
+    ).toEqual(6);
   });
 });

@@ -14,6 +14,6 @@ describe('iterMap', () => {
   });
 
   test('iterMap은 iterable을 처리할 수 있다.', () => {
-    expect(iterMap(gen(), (item) => item * 2)).toEqual([2, 4, 6]);
+    expect(iterMap((item: any) => item * 2, gen())).toEqual([2, 4, 6]);
   });
 });
