@@ -13,40 +13,50 @@ interface QueryStringOptions {
   sort: any;
 }
 
-interface IQueryString {
-  stringify(params?: unknown, options?: Partial<QueryStringOptions>): string;
-}
-
 const isObject = (arg: unknown) => {
   return typeof arg === 'object' && arg !== null && !Array.isArray(arg);
 };
 
-const queryString: IQueryString = {
-  stringify(params, options) {
-    const qsOptions: Partial<QueryStringOptions> = {
-      encode: true,
-      strict: true,
-    };
-    Object.assign(qsOptions, options);
-    if (!isObject(params)) return '';
+function* iterFlatten(iter: IterableIterator<any>) {
+  for (const [k, v] of iter) {
+    if (Array.isArray(v)) {
+      for (const item of v) {
+        yield [k, item];
+      }
+    } else {
+      yield [k, v];
+    }
+  }
+}
 
-    const encodeMapper = ([k, v]: [k: string, v: string]) => {
-      if (!qsOptions.encode) return [k, v];
-      return qsOptions.strict
-        ? [strictUriEncode(k), strictUriEncode(v)]
-        : [encodeURIComponent(k), encodeURIComponent(v)];
-    };
+function stringify(
+  params?: unknown,
+  options?: Partial<QueryStringOptions>
+): string {
+  const qsOptions: Partial<QueryStringOptions> = {
+    encode: true,
+    strict: true,
+  };
+  Object.assign(qsOptions, options);
+  if (!isObject(params)) return '';
 
-    const stringified = go(
-      params,
-      Object.entries,
-      iterMap(encodeMapper),
-      iterMap(([k, v]: [k: any, v: any]) => `${k}=${v}`),
-      iterReduce((prev: any, curr: any) => `${prev}&${curr}`)
-    );
+  const encodeMapper = ([k, v]: [k: string, v: string]) => {
+    console.log([k, v]);
+    if (!qsOptions.encode) return `${k}=${v}`;
+    return qsOptions.strict
+      ? `${strictUriEncode(k)}=${strictUriEncode(v)}`
+      : `${encodeURIComponent(k)}=${encodeURIComponent(v)}`;
+  };
 
-    return stringified;
-  },
-};
+  const stringified = go(
+    params,
+    Object.entries,
+    iterFlatten,
+    iterMap(encodeMapper),
+    iterReduce((prev: any, curr: any) => `${prev}&${curr}`)
+  );
 
-export default queryString;
+  return stringified;
+}
+
+export default stringify;

@@ -31,35 +31,35 @@ test('no encoding', (t) => {
   );
 });
 
-// test('handle array value', (t) => {
-//   t.is(
-//     stringify({
-//       abc: 'abc',
-//       foo: ['bar', 'baz'],
-//     }),
-//     'abc=abc&foo=bar&foo=baz'
-//   );
-// });
+test('handle array value', (t) => {
+  t.is(
+    stringify({
+      abc: 'abc',
+      foo: ['bar', 'baz'],
+    }),
+    'abc=abc&foo=bar&foo=baz'
+  );
+});
 
-// test('array order', (t) => {
-//   t.is(
-//     stringify({
-//       abc: 'abc',
-//       foo: ['baz', 'bar'],
-//     }),
-//     'abc=abc&foo=baz&foo=bar'
-//   );
-// });
+test('array order', (t) => {
+  t.is(
+    stringify({
+      abc: 'abc',
+      foo: ['baz', 'bar'],
+    }),
+    'abc=abc&foo=baz&foo=bar'
+  );
+});
 
-// test('handle empty array value', (t) => {
-//   t.is(
-//     stringify({
-//       abc: 'abc',
-//       foo: [],
-//     }),
-//     'abc=abc'
-//   );
-// });
+test('handle empty array value', (t) => {
+  t.is(
+    stringify({
+      abc: 'abc',
+      foo: [],
+    }),
+    'abc=abc'
+  );
+});
 
 // test('should not encode undefined values', (t) => {
 //   t.is(
