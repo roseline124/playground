@@ -2,6 +2,7 @@ import go from '../utils/go';
 import iterMap from '../utils/iterMap';
 import iterReduce from '../utils/iterReduce';
 import strictUriEncode from 'strict-uri-encode';
+import iterFilter from '../utils/iterFilter';
 
 interface QueryStringOptions {
   encode: boolean;
@@ -41,7 +42,11 @@ function stringify(
   if (!isObject(params)) return '';
 
   const encodeMapper = ([k, v]: [k: string, v: string]) => {
-    console.log([k, v]);
+    if (v === null) {
+      if (!qsOptions.encode) return k;
+      return qsOptions.strict ? strictUriEncode(k) : encodeURIComponent(k);
+    }
+
     if (!qsOptions.encode) return `${k}=${v}`;
     return qsOptions.strict
       ? `${strictUriEncode(k)}=${strictUriEncode(v)}`
@@ -52,6 +57,7 @@ function stringify(
     params,
     Object.entries,
     iterFlatten,
+    iterFilter(([k, v]: [k: string, v: string]) => v !== undefined),
     iterMap(encodeMapper),
     iterReduce((prev: any, curr: any) => `${prev}&${curr}`)
   );

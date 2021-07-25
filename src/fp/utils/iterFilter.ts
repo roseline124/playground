@@ -1,12 +1,16 @@
-const iterFilter = (iter: IterableIterator<any>, fn: (item: any) => any) => {
-	const temporary = [];
-	for (const item of iter) {
-		if (fn(item)) {
-			temporary.push(item);
-		}
-	}
+import curry from './curry';
 
-	return temporary;
-};
+const iterFilter = curry(
+  (fn: (item: any) => any, iter: IterableIterator<any>) => {
+    const temporary = [];
+    for (const item of iter) {
+      if (fn(item)) {
+        temporary.push(item);
+      }
+    }
+
+    return temporary;
+  }
+);
 
 export default iterFilter;

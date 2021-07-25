@@ -14,6 +14,6 @@ describe('iterFilter', () => {
   });
 
   test('iterFilter은 iterable을 처리할 수 있다.', () => {
-    expect(iterFilter(gen(), (item) => item % 2 === 0)).toEqual([2]);
+    expect(iterFilter((item: number) => item % 2 === 0, gen())).toEqual([2]);
   });
 });
