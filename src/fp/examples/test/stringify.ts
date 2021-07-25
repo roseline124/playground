@@ -1,12 +1,12 @@
 import test from 'ava';
-import queryString from '../stringify';
+import stringify from '../stringify';
 
 // test code from `https://github.com/sindresorhus/query-string/blob/main/test/stringify.js`
 
 test('stringify', (t) => {
-  t.is(queryString.stringify({ foo: 'bar' }), 'foo=bar');
+  t.is(stringify({ foo: 'bar' }), 'foo=bar');
   t.is(
-    queryString.stringify({
+    stringify({
       foo: 'bar',
       bar: 'baz',
     }),
@@ -15,25 +15,25 @@ test('stringify', (t) => {
 });
 
 test('different types', (t) => {
-  t.is(queryString.stringify(), '');
-  t.is(queryString.stringify(0), '');
+  t.is(stringify(), '');
+  t.is(stringify(0), '');
 });
 
 test('URI encode', (t) => {
-  t.is(queryString.stringify({ 'foo bar': 'baz faz' }), 'foo%20bar=baz%20faz');
-  t.is(queryString.stringify({ 'foo bar': "baz'faz" }), 'foo%20bar=baz%27faz');
+  t.is(stringify({ 'foo bar': 'baz faz' }), 'foo%20bar=baz%20faz');
+  t.is(stringify({ 'foo bar': "baz'faz" }), 'foo%20bar=baz%27faz');
 });
 
 test('no encoding', (t) => {
   t.is(
-    queryString.stringify({ 'foo:bar': 'baz:faz' }, { encode: false }),
+    stringify({ 'foo:bar': 'baz:faz' }, { encode: false }),
     'foo:bar=baz:faz'
   );
 });
 
 // test('handle array value', (t) => {
 //   t.is(
-//     queryString.stringify({
+//     stringify({
 //       abc: 'abc',
 //       foo: ['bar', 'baz'],
 //     }),
@@ -43,7 +43,7 @@ test('no encoding', (t) => {
 
 // test('array order', (t) => {
 //   t.is(
-//     queryString.stringify({
+//     stringify({
 //       abc: 'abc',
 //       foo: ['baz', 'bar'],
 //     }),
@@ -53,7 +53,7 @@ test('no encoding', (t) => {
 
 // test('handle empty array value', (t) => {
 //   t.is(
-//     queryString.stringify({
+//     stringify({
 //       abc: 'abc',
 //       foo: [],
 //     }),
@@ -63,7 +63,7 @@ test('no encoding', (t) => {
 
 // test('should not encode undefined values', (t) => {
 //   t.is(
-//     queryString.stringify({
+//     stringify({
 //       abc: undefined,
 //       foo: 'baz',
 //     }),
@@ -73,7 +73,7 @@ test('no encoding', (t) => {
 
 // test('should encode null values as just a key', (t) => {
 //   t.is(
-//     queryString.stringify({
+//     stringify({
 //       'x y z': null,
 //       abc: null,
 //       foo: 'baz',
@@ -84,7 +84,7 @@ test('no encoding', (t) => {
 
 // test('handle null values in array', (t) => {
 //   t.is(
-//     queryString.stringify({
+//     stringify({
 //       foo: null,
 //       bar: [null, 'baz'],
 //     }),
@@ -94,7 +94,7 @@ test('no encoding', (t) => {
 
 // test('handle undefined values in array', (t) => {
 //   t.is(
-//     queryString.stringify({
+//     stringify({
 //       foo: null,
 //       bar: [undefined, 'baz'],
 //     }),
@@ -104,7 +104,7 @@ test('no encoding', (t) => {
 
 // test('handle undefined and null values in array', (t) => {
 //   t.is(
-//     queryString.stringify({
+//     stringify({
 //       foo: null,
 //       bar: [undefined, null, 'baz'],
 //     }),
@@ -113,24 +113,24 @@ test('no encoding', (t) => {
 // });
 
 // test('strict encoding', (t) => {
-//   t.is(queryString.stringify({ foo: "'bar'" }), 'foo=%27bar%27');
+//   t.is(stringify({ foo: "'bar'" }), 'foo=%27bar%27');
 //   t.is(
-//     queryString.stringify({ foo: ["'bar'", '!baz'] }),
+//     stringify({ foo: ["'bar'", '!baz'] }),
 //     'foo=%27bar%27&foo=%21baz'
 //   );
 // });
 
 // test('loose encoding', (t) => {
-//   t.is(queryString.stringify({ foo: "'bar'" }, { strict: false }), "foo='bar'");
+//   t.is(stringify({ foo: "'bar'" }, { strict: false }), "foo='bar'");
 //   t.is(
-//     queryString.stringify({ foo: ["'bar'", '!baz'] }, { strict: false }),
+//     stringify({ foo: ["'bar'", '!baz'] }, { strict: false }),
 //     "foo='bar'&foo=!baz"
 //   );
 // });
 
 // test('array stringify representation with array indexes', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['one', 'two'],
@@ -145,7 +145,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with array brackets', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['one', 'two'],
@@ -160,7 +160,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with array brackets and null value', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: ['a', null, ''],
 //         bar: [null],
@@ -175,7 +175,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with array commas', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['one', 'two'],
@@ -190,7 +190,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with array commas, null & empty string', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         c: [null, 'a', '', null],
 //         b: [null],
@@ -206,7 +206,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with array commas, null & empty string (skip both)', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         c: [null, 'a', '', null],
 //         b: [null],
@@ -224,7 +224,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with array commas and 0 value', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: ['a', null, 0],
 //         bar: [null],
@@ -239,7 +239,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with a bad array format', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['one', 'two'],
@@ -256,14 +256,14 @@ test('no encoding', (t) => {
 //   const fixture = ['one', 'two'];
 //   fixture[10] = 'three';
 //   t.is(
-//     queryString.stringify({ bar: fixture }, { arrayFormat: 'index' }),
+//     stringify({ bar: fixture }, { arrayFormat: 'index' }),
 //     'bar[0]=one&bar[1]=two&bar[2]=three'
 //   );
 // });
 
 // test('array stringify representation with brackets and separators with empty array', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: [],
@@ -278,7 +278,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with brackets and separators with single value', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['one'],
@@ -293,7 +293,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with brackets and separators with multiple values', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['one', 'two', 'three'],
@@ -308,7 +308,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with brackets and separators with a single empty string', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: [''],
@@ -323,7 +323,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with brackets and separators with a multiple empty string', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['', 'two', ''],
@@ -338,7 +338,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with brackets and separators with dropped empty strings', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['', 'two', ''],
@@ -354,7 +354,7 @@ test('no encoding', (t) => {
 
 // test('array stringify representation with brackets and separators with dropped null values', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         foo: null,
 //         bar: ['one', null, 'three', null, '', 'six'],
@@ -373,7 +373,7 @@ test('no encoding', (t) => {
 // //   const sort = (key1, key2) => fixture.indexOf(key1) - fixture.indexOf(key2);
 
 // //   t.is(
-// //     queryString.stringify({ a: 'foo', b: 'bar', c: 'baz' }, { sort }),
+// //     stringify({ a: 'foo', b: 'bar', c: 'baz' }, { sort }),
 // //     'c=baz&a=foo&b=bar'
 // //   );
 // // });
@@ -394,14 +394,14 @@ test('no encoding', (t) => {
 //     destination: 'g',
 //   };
 //   t.is(
-//     queryString.stringify(fixture, { sort: false }),
+//     stringify(fixture, { sort: false }),
 //     'story=a&patch=b&deployment=c&lat=10&lng=20&sb=d&sc=e&mn=f&ln=g&nf=h&srs=i&destination=g'
 //   );
 // });
 
 // test('should disable sorting', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         c: 'foo',
 //         b: 'bar',
@@ -417,7 +417,7 @@ test('no encoding', (t) => {
 
 // test('should ignore null when skipNull is set', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: 1,
 //         b: null,
@@ -433,7 +433,7 @@ test('no encoding', (t) => {
 
 // test('should ignore emptyString when skipEmptyString is set', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: 1,
 //         b: '',
@@ -449,7 +449,7 @@ test('no encoding', (t) => {
 
 // test('should ignore undefined when skipNull is set', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: 1,
 //         b: undefined,
@@ -465,7 +465,7 @@ test('no encoding', (t) => {
 
 // test('should ignore both null and undefined when skipNull is set', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: undefined,
 //         b: null,
@@ -480,7 +480,7 @@ test('no encoding', (t) => {
 
 // test('should ignore both null and undefined when skipNull is set for arrayFormat', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: [undefined, null, 1, undefined, 2, null],
 //         b: null,
@@ -494,7 +494,7 @@ test('no encoding', (t) => {
 //   );
 
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: [undefined, null, 1, undefined, 2, null],
 //         b: null,
@@ -509,7 +509,7 @@ test('no encoding', (t) => {
 //   );
 
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: [undefined, null, 1, undefined, 2, null],
 //         b: null,
@@ -524,7 +524,7 @@ test('no encoding', (t) => {
 //   );
 
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: [undefined, null, 1, undefined, 2, null],
 //         b: null,
@@ -541,7 +541,7 @@ test('no encoding', (t) => {
 
 // test('should ignore empty string when skipEmptyString is set for arrayFormat', (t) => {
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: ['', 1, '', 2],
 //         b: '',
@@ -555,7 +555,7 @@ test('no encoding', (t) => {
 //   );
 
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: ['', 1, '', 2],
 //         b: '',
@@ -570,7 +570,7 @@ test('no encoding', (t) => {
 //   );
 
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: ['', 1, '', 2],
 //         b: '',
@@ -585,7 +585,7 @@ test('no encoding', (t) => {
 //   );
 
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: ['', 1, '', 2],
 //         b: '',
@@ -600,7 +600,7 @@ test('no encoding', (t) => {
 //   );
 
 //   t.is(
-//     queryString.stringify(
+//     stringify(
 //       {
 //         a: ['', '', '', ''],
 //         c: 1,
@@ -614,10 +614,10 @@ test('no encoding', (t) => {
 // });
 
 // // test('stringify throws TypeError for invalid arrayFormatSeparator', (t) => {
-// //   t.throws((_) => queryString.stringify({}, { arrayFormatSeparator: ',,' }), {
+// //   t.throws((_) => stringify({}, { arrayFormatSeparator: ',,' }), {
 // //     instanceOf: TypeError,
 // //   });
-// //   t.throws((_) => queryString.stringify({}, { arrayFormatSeparator: [] }), {
+// //   t.throws((_) => stringify({}, { arrayFormatSeparator: [] }), {
 // //     instanceOf: TypeError,
 // //   });
 // // });
