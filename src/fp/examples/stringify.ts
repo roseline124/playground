@@ -3,6 +3,7 @@ import iterMap from '../utils/iterMap';
 import iterReduce from '../utils/iterReduce';
 import strictUriEncode from 'strict-uri-encode';
 import iterFilter from '../utils/iterFilter';
+import curry from '../utils/curry';
 
 interface QueryStringOptions {
   encode: boolean;
@@ -13,6 +14,8 @@ interface QueryStringOptions {
   skipEmptyString: boolean;
   sort: any;
 }
+
+type Options = Partial<QueryStringOptions>;
 
 const isObject = (arg: unknown) => {
   return typeof arg === 'object' && arg !== null && !Array.isArray(arg);
@@ -30,35 +33,36 @@ function* iterFlatten(iter: IterableIterator<any>) {
   }
 }
 
-function stringify(
-  params?: unknown,
-  options?: Partial<QueryStringOptions>
-): string {
-  const qsOptions: Partial<QueryStringOptions> = {
-    encode: true,
-    strict: true,
-  };
-  Object.assign(qsOptions, options);
-  if (!isObject(params)) return '';
-
-  const encodeMapper = ([k, v]: [k: string, v: string]) => {
+const encodeMapper = curry(
+  (qsOptions: Options, [k, v]: [k: string, v: string]) => {
     if (v === null) {
       if (!qsOptions.encode) return k;
       return qsOptions.strict ? strictUriEncode(k) : encodeURIComponent(k);
     }
 
     if (!qsOptions.encode) return `${k}=${v}`;
+
     return qsOptions.strict
       ? `${strictUriEncode(k)}=${strictUriEncode(v)}`
       : `${encodeURIComponent(k)}=${encodeURIComponent(v)}`;
+  }
+);
+
+function stringify(params?: unknown, options?: Options): string {
+  const qsOptions: Options = {
+    encode: true,
+    strict: true,
   };
+
+  Object.assign(qsOptions, options);
+  if (!isObject(params)) return '';
 
   const stringified = go(
     params,
     Object.entries,
     iterFlatten,
     iterFilter(([k, v]: [k: string, v: string]) => v !== undefined),
-    iterMap(encodeMapper),
+    iterMap(encodeMapper(qsOptions)),
     iterReduce((prev: any, curr: any) => `${prev}&${curr}`)
   );
 

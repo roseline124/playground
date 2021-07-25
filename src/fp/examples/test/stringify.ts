@@ -3,63 +3,63 @@ import stringify from '../stringify';
 
 // test code from `https://github.com/sindresorhus/query-string/blob/main/test/stringify.js`
 
-// test('stringify', (t) => {
-//   t.is(stringify({ foo: 'bar' }), 'foo=bar');
-//   t.is(
-//     stringify({
-//       foo: 'bar',
-//       bar: 'baz',
-//     }),
-//     'foo=bar&bar=baz'
-//   );
-// });
+test('stringify', (t) => {
+  t.is(stringify({ foo: 'bar' }), 'foo=bar');
+  t.is(
+    stringify({
+      foo: 'bar',
+      bar: 'baz',
+    }),
+    'foo=bar&bar=baz'
+  );
+});
 
-// test('different types', (t) => {
-//   t.is(stringify(), '');
-//   t.is(stringify(0), '');
-// });
+test('different types', (t) => {
+  t.is(stringify(), '');
+  t.is(stringify(0), '');
+});
 
-// test('URI encode', (t) => {
-//   t.is(stringify({ 'foo bar': 'baz faz' }), 'foo%20bar=baz%20faz');
-//   t.is(stringify({ 'foo bar': "baz'faz" }), 'foo%20bar=baz%27faz');
-// });
+test('URI encode', (t) => {
+  t.is(stringify({ 'foo bar': 'baz faz' }), 'foo%20bar=baz%20faz');
+  t.is(stringify({ 'foo bar': "baz'faz" }), 'foo%20bar=baz%27faz');
+});
 
-// test('no encoding', (t) => {
-//   t.is(
-//     stringify({ 'foo:bar': 'baz:faz' }, { encode: false }),
-//     'foo:bar=baz:faz'
-//   );
-// });
+test('no encoding', (t) => {
+  t.is(
+    stringify({ 'foo:bar': 'baz:faz' }, { encode: false }),
+    'foo:bar=baz:faz'
+  );
+});
 
-// test('handle array value', (t) => {
-//   t.is(
-//     stringify({
-//       abc: 'abc',
-//       foo: ['bar', 'baz'],
-//     }),
-//     'abc=abc&foo=bar&foo=baz'
-//   );
-// });
+test('handle array value', (t) => {
+  t.is(
+    stringify({
+      abc: 'abc',
+      foo: ['bar', 'baz'],
+    }),
+    'abc=abc&foo=bar&foo=baz'
+  );
+});
 
-// test('array order', (t) => {
-//   t.is(
-//     stringify({
-//       abc: 'abc',
-//       foo: ['baz', 'bar'],
-//     }),
-//     'abc=abc&foo=baz&foo=bar'
-//   );
-// });
+test('array order', (t) => {
+  t.is(
+    stringify({
+      abc: 'abc',
+      foo: ['baz', 'bar'],
+    }),
+    'abc=abc&foo=baz&foo=bar'
+  );
+});
 
-// test('handle empty array value', (t) => {
-//   t.is(
-//     stringify({
-//       abc: 'abc',
-//       foo: [],
-//     }),
-//     'abc=abc'
-//   );
-// });
+test('handle empty array value', (t) => {
+  t.is(
+    stringify({
+      abc: 'abc',
+      foo: [],
+    }),
+    'abc=abc'
+  );
+});
 
 test('should not encode undefined values', (t) => {
   t.is(
@@ -112,21 +112,18 @@ test('handle undefined and null values in array', (t) => {
   );
 });
 
-// test('strict encoding', (t) => {
-//   t.is(stringify({ foo: "'bar'" }), 'foo=%27bar%27');
-//   t.is(
-//     stringify({ foo: ["'bar'", '!baz'] }),
-//     'foo=%27bar%27&foo=%21baz'
-//   );
-// });
+test('strict encoding', (t) => {
+  t.is(stringify({ foo: "'bar'" }), 'foo=%27bar%27');
+  t.is(stringify({ foo: ["'bar'", '!baz'] }), 'foo=%27bar%27&foo=%21baz');
+});
 
-// test('loose encoding', (t) => {
-//   t.is(stringify({ foo: "'bar'" }, { strict: false }), "foo='bar'");
-//   t.is(
-//     stringify({ foo: ["'bar'", '!baz'] }, { strict: false }),
-//     "foo='bar'&foo=!baz"
-//   );
-// });
+test('loose encoding', (t) => {
+  t.is(stringify({ foo: "'bar'" }, { strict: false }), "foo='bar'");
+  t.is(
+    stringify({ foo: ["'bar'", '!baz'] }, { strict: false }),
+    "foo='bar'&foo=!baz"
+  );
+});
 
 // test('array stringify representation with array indexes', (t) => {
 //   t.is(
