@@ -4,7 +4,7 @@
   "description": "나의 작고 소중한 놀이터",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "test": "ava --verbose"
   },
   "author": "roseline124",
@@ -35,6 +35,7 @@
     ]
   },
   "dependencies": {
+    "reflect-metadata": "^0.1.13",
     "strict-uri-encode": "^2.0.0"
   }
 }

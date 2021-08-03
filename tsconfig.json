@@ -6,7 +6,9 @@
     "skipLibCheck": true,
     "downlevelIteration": true,
     "target": "es2020", // Node.js 14
-    "lib": ["es2020"]
+    "lib": ["es2020"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
