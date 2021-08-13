@@ -10,6 +10,7 @@
   "author": "roseline124",
   "license": "ISC",
   "devDependencies": {
+    "@types/fxjs": "^0.15.0",
     "@types/jest": "^26.0.24",
     "@types/strict-uri-encode": "^2.0.0",
     "ava": "^3.15.0",
@@ -35,6 +36,7 @@
     ]
   },
   "dependencies": {
+    "fxjs": "^0.21.3",
     "reflect-metadata": "^0.1.13",
     "strict-uri-encode": "^2.0.0"
   }

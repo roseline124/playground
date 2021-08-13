@@ -265,6 +265,14 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
+"@babel/runtime-corejs3@^7.14.5":
+  version "7.15.3"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.15.3.tgz#28754263988198f2a928c09733ade2fb4d28089d"
+  integrity sha512-30A3lP+sRL6ml8uhoJSs+8jwpKzbw8CqBvDc1laeptxPm5FahumJxirigcbD2qTs71Sonvj1cyZB0OKGAmxQ+A==
+  dependencies:
+    core-js-pure "^3.16.0"
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.14.5", "@babel/template@^7.3.3":
   version "7.14.5"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.14.5.tgz#a9bc9d8b33354ff6e55a9c60d1109200a68974f4"
@@ -589,6 +597,11 @@
   integrity sha512-K2waXdXBi2302XUdcHcR1jCeU0LL4TD9HRs/gk0N2Xvrht+G/BfJa4QObBQZfhMdxiCpV3COl5Nfq4uKTeTnJA==
   dependencies:
     "@babel/types" "^7.3.0"
+
+"@types/fxjs@^0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@types/fxjs/-/fxjs-0.15.0.tgz#65865acd143cb2f4dbf3b8ffd0313c9c13005758"
+  integrity sha512-0DJytjz2PjgNflOpc2b6WPVpU9IDk8AucfHgMj553gi7CBGsdzhSgOy64fmcHLKqh60ZKLnq2FHMyKJStqNJxA==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
@@ -1300,6 +1313,11 @@ convert-to-spaces@^1.0.1:
   resolved "https://registry.yarnpkg.com/convert-to-spaces/-/convert-to-spaces-1.0.2.tgz#7e3e48bbe6d997b1417ddca2868204b4d3d85715"
   integrity sha1-fj5Iu+bZl7FBfdyihoIEtNPYVxU=
 
+core-js-pure@^3.16.0:
+  version "3.16.1"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.16.1.tgz#b997df2669c957a5b29f06e95813a171f993592e"
+  integrity sha512-TyofCdMzx0KMhi84mVRS8rL1XsRk2SPUNz2azmth53iRN0/08Uim9fdhQTaZTG1LqaXHYVci4RDHka6WrXfnvg==
+
 create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
@@ -1697,6 +1715,13 @@ function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
+
+fxjs@^0.21.3:
+  version "0.21.3"
+  resolved "https://registry.yarnpkg.com/fxjs/-/fxjs-0.21.3.tgz#65ba890b374b7e42ed9b18994971e178c9d88a86"
+  integrity sha512-8VubsQoPEm2bA+Q80Bh12cTWCnGpIi1T6e6Ot61ZfqbB3yoickB+//HJDpq+okdmu9gNQmnN7VpfRaT/aBdwXA==
+  dependencies:
+    "@babel/runtime-corejs3" "^7.14.5"
 
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
@@ -3222,6 +3247,11 @@ reflect-metadata@^0.1.13:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
   integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
+
+regenerator-runtime@^0.13.4:
+  version "0.13.9"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
+  integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
 
 registry-auth-token@^4.0.0:
   version "4.2.1"
