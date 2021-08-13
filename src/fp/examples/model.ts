@@ -20,14 +20,14 @@ export class Model<
   }
 }
 
-export class Collection<T> {
-  constructor(private models: Model<T>[] = []) {}
+export class Collection<M> {
+  constructor(private models: M[] = []) {}
 
   at(idx: number) {
     return this.models[idx];
   }
 
-  add(model: Model<T>) {
+  add(model: M) {
     this.models.push(model);
     return this;
   }
@@ -52,8 +52,8 @@ interface User {
   name: string;
 }
 
-(function () {
-  const collection = new Collection<User>();
+const main = () => {
+  const collection = new Collection<Model<User>>();
   collection.add(new Model({ id: 1, name: 'A' }));
   collection.add(new Model({ id: 2, name: 'B' }));
   collection.add(new Model({ id: 3, name: 'C' }));
@@ -73,4 +73,6 @@ interface User {
     lazyMap((model: Model<User>) => model.get('name')),
     _.each(console.log)
   );
-})();
+};
+
+// main();
