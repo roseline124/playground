@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "fxjs": "^0.21.3",
+    "nact": "^7.6.0",
     "reflect-metadata": "^0.1.13",
     "strict-uri-encode": "^2.0.0"
   }
