@@ -11,3 +11,10 @@ export const ContactProtocolTypes = {
   // 연락처를 찾지 못했을 때
   NOT_FOUND: 'NOT_FOUND',
 } as const;
+
+export interface IContactMessage {
+  type: string;
+  userId?: string;
+  contactId?: string;
+  payload?: any;
+}

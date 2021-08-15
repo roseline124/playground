@@ -1,15 +1,9 @@
 import { Response } from 'express';
 import { query } from 'nact';
 import { contactService } from './actor';
-import { ContactProtocolTypes } from './types';
+import { ContactProtocolTypes, IContactMessage } from './types';
 
 const TIMEOUT = 250;
-
-interface IContactMessage {
-  type: string;
-  contactId?: string;
-  payload?: any;
-}
 
 export const performQuery = async (msg: IContactMessage, res: Response) => {
   try {
