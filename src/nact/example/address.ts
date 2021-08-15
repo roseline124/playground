@@ -1,43 +1,55 @@
-import express from 'express';
 import { json } from 'body-parser';
+import express from 'express';
+import { performQuery } from './utils';
+import { ContactProtocolTypes } from './types';
 
-const ContactProtocolTypes = {
-  GET_CONTACT_LIST: 'GET_CONTACT_LIST',
-  GET_CONTACT: 'GET_CONTACT',
-  UPDATE_CONTACT: 'UPDATE_CONTACT',
-  REMOVE_CONTACT: 'REMOVE_CONTACT',
-  CREATE_CONTACT: 'CREATE_CONTACT',
-
-  // 성공
-  SUCCESS: 'SUCCESS',
-
-  // 연락처를 찾지 못했을 때
-  NOT_FOUND: 'NOT_FOUND',
-} as const;
+const TIMEOUT = 250;
 
 const app = express();
 
 app.use(json());
 
-app.get('/api/contacts', (req, res) => {
-  /* 모든 연락처 조회 */
-});
+app.get('/api/contacts', (req, res) =>
+  performQuery({ type: ContactProtocolTypes.GET_CONTACT_LIST }, res)
+);
 
-app.get('/api/contacts/:contact_id', (req, res) => {
-  /* 특정 연락처 조회 */
-});
+app.get('/api/contacts/:contact_id', (req, res) =>
+  performQuery(
+    {
+      type: ContactProtocolTypes.GET_CONTACT,
+      contactId: req.params.contact_id,
+    },
+    res
+  )
+);
 
-app.post('/api/contacts', (req, res) => {
-  /* 새 연락처 추가 */
-});
+app.post('/api/contacts', (req, res) =>
+  performQuery(
+    { type: ContactProtocolTypes.CREATE_CONTACT, payload: req.body },
+    res
+  )
+);
 
-app.patch('/api/contacts/:contact_id', (req, res) => {
-  /* 연락처 수정 */
-});
+app.patch('/api/contacts/:contact_id', (req, res) =>
+  performQuery(
+    {
+      type: ContactProtocolTypes.UPDATE_CONTACT,
+      contactId: req.params.contact_id,
+      payload: req.body,
+    },
+    res
+  )
+);
 
-app.delete('api/contacts/:contact_id', (req, res) => {
-  /* 연락처 삭제 */
-});
+app.delete('/api/contacts/:contact_id', (req, res) =>
+  performQuery(
+    {
+      type: ContactProtocolTypes.REMOVE_CONTACT,
+      contactId: req.params.contact_id,
+    },
+    res
+  )
+);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`${process.env.PORT || 3000} 포트 수신중!`);
