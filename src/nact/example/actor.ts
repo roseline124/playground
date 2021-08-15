@@ -9,7 +9,18 @@ import {
 } from 'nact';
 import { ContactProtocolTypes } from './types';
 
-const system = start();
+const delay = (duration: number) =>
+  new Promise((resolve) => setTimeout(() => resolve(void 0), duration));
+
+const resetWithExponentialDelay = (factor: number) => {
+  let count = 0;
+  return async (msg: any, error: any, ctx: any) => {
+    let time = (2 ** count - 1) * factor;
+    await delay(time);
+    count = count + 1;
+    return ctx.reset;
+  };
+};
 
 const handler = (
   state: any = { contacts: {} },
@@ -112,5 +123,6 @@ export const spawnContactsService = (parent: string) =>
         dispatch(childActor, msg);
       }
     },
-    'contacts'
+    'contacts',
+    { onCrash: resetWithExponentialDelay(1000) }
   );
