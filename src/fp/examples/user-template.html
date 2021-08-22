@@ -4,19 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>User Template Example</title>
     <script src="https://unpkg.com/fxjs/dist/fx.js"></script>
     <script src="./faker.js" type="text/javascript"></script>
     <style>
       table,
       td {
         border: 1px solid #333;
+        text-align: center;
+      }
+
+      td:not(:first-child) {
+        width: 100%;
       }
 
       thead,
       tfoot {
         background-color: #333;
         color: #fff;
+      }
+
+      img {
+        width: 100px;
+        height: 100px;
       }
     </style>
   </head>
@@ -47,35 +57,59 @@
   </body>
   <script>
     const { L, C } = window._;
+
+    /**
+     * Dom Manipulate
+     */
+    const $ = {};
+    $.qs = document.querySelector.bind(document);
+    $.appendHtml = _.curry((sel, html) => {
+      const parent = $.qs(sel);
+      parent.innerHTML = html;
+    });
+  </script>
+  <script>
+    /**
+     * Utils
+     */
     function* generateUsers() {
       while (true) {
         yield {
-          id: faker.random.uuid(),
-          name: faker.name.firstName(),
+          id: faker.datatype.uuid(),
+          name: `${faker.name.firstName()} ${faker.name.lastName()}`,
           email: faker.internet.email(),
           profile: faker.image.avatar(),
         };
       }
     }
 
-    const userRows = _.go(
-      L.range(Infinity),
-      generateUsers,
-      L.take(5),
-      _.map(
+    const string = (iter) => _.reduce((a, b) => `${a}${b}`, iter);
+    _.strMap = _.pipe(L.map, string);
+  </script>
+  <script>
+    const takeUsers = (limit) =>
+      _.go(L.range(Infinity), generateUsers, L.take(limit));
+
+    const UBase = {};
+    UBase.fetch = () =>
+      new Promise((resolve) => setTimeout(() => resolve(takeUsers(10)), 500));
+    UBase.tmpl = (users) =>
+      _.strMap(
         /*html*/
         (user) => `
         <tr>
           <td>${user.id}</td>
           <td>${user.name}</td>
           <td>${user.email}</td>
-          <td>${user.profile}</td>
+          <td>
+            <img src="${user.profile}"/>
+          </td>
         </tr>
-      `
-      )
-    );
+      `,
+        users
+      );
 
-    const tbody = document.querySelector('#tbody');
-    tbody.innerHTML = userRows;
+    const userRows = _.go(UBase.fetch(), UBase.tmpl);
+    userRows.then($.appendHtml('#tbody'));
   </script>
 </html>
