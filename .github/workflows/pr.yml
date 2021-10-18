@@ -6,6 +6,12 @@ on:
     types: [opened, edited, synchronize, reopened]
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
   lint:
     runs-on: ubuntu-latest
     steps:
